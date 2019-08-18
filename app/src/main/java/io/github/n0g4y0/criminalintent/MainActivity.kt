@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         if (currentFragment == null){
             // asignamos el FRAGMENT que deseamos manejar, a una variable, para luego manipularlo.
-            val fragment = CrimeFragment()
+            val fragment = CrimeListFragment.newInstance()
             supportFragmentManager
                 .beginTransaction()
                 //desde aqui, especificamos que queremos hacer con el FRAGMENT en cuestion:
