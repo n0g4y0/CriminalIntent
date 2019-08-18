@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import io.github.n0g4y0.criminalintent.models.Crime
@@ -18,6 +19,9 @@ class CrimeFragment : Fragment() {
 
     // ahora el boton:
     private lateinit var dateButton: Button
+
+    // ahora el checkbox:
+    private lateinit var solvedCheckBox: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +44,8 @@ class CrimeFragment : Fragment() {
         titleField = view.findViewById(R.id.crime_title) as EditText
         // conectando al boton:
         dateButton = view.findViewById(R.id.crime_date) as Button
+        // conectando el checkbox:
+        solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
 
         dateButton.apply {
             text = crime.date.toString()
@@ -85,6 +91,12 @@ class CrimeFragment : Fragment() {
 
         }
         titleField.addTextChangedListener(titleWatcher)
+
+        solvedCheckBox.apply {
+            setOnCheckedChangeListener { _, isChecked ->
+                crime.isSolved = isChecked
+            }
+        }
 
     }
 
