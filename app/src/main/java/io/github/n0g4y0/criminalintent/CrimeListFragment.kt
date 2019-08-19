@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,12 +72,20 @@ class CrimeListFragment : Fragment() {
     * */
 
     private inner class CrimeHolder(view: View)
-        : RecyclerView.ViewHolder(view){
+        : RecyclerView.ViewHolder(view), View.OnClickListener {
 
         private lateinit var crime: Crime
 
         val titleTextView: TextView = itemView.findViewById(R.id.crime_title)
         val dateTextView: TextView = itemView.findViewById(R.id.crime_date)
+
+        /*
+        * es un escuchador (LISTENER) de cada item que se haga click
+        * */
+
+        init {
+            itemView.setOnClickListener(this)
+        }
 
         // funcion que vincula los datos del CRIME, con los WIDGETs
         fun bind(crime:Crime){
@@ -87,6 +96,11 @@ class CrimeListFragment : Fragment() {
             titleTextView.text = this.crime.title
             dateTextView.text = this.crime.date.toString()
 
+        }
+
+        override fun onClick(v: View?) {
+            Toast.makeText(context, "${crime.title} Clickeado..!!",Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
