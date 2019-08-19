@@ -113,6 +113,8 @@ class CrimeListFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
                 : CrimeHolder {
+
+            getItemViewType()
             val view = layoutInflater.inflate(R.layout.list_item_crime,parent,false)
             return CrimeHolder(view)
 
