@@ -66,12 +66,33 @@ class CrimeListFragment : Fragment() {
         }
     }
 
+    /*
+    * esta funcion maneja to.do el codigo que hara el trabajo de vinculacion (BIND)
+    * */
+
     private inner class CrimeHolder(view: View)
         : RecyclerView.ViewHolder(view){
 
+        private lateinit var crime: Crime
+
         val titleTextView: TextView = itemView.findViewById(R.id.crime_title)
         val dateTextView: TextView = itemView.findViewById(R.id.crime_date)
+
+        // funcion que vincula los datos del CRIME, con los WIDGETs
+        fun bind(crime:Crime){
+
+            this.crime = crime
+
+            // asignando el texto, al atributo TEXT de los WIDGETs
+            titleTextView.text = this.crime.title
+            dateTextView.text = this.crime.date.toString()
+
+        }
     }
+
+    /*
+    * funcion para manejar el adaptador de CRIME
+    * */
 
     private inner class CrimeAdapter(var crimes: List<Crime>)
         :RecyclerView.Adapter<CrimeHolder>(){
@@ -89,10 +110,7 @@ class CrimeListFragment : Fragment() {
         override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
 
             val crime = crimes[position]
-            holder.apply {
-                titleTextView.text = crime.title
-                dateTextView.text = crime.date.toString()
-            }
+            holder.bind(crime)
 
         }
 
