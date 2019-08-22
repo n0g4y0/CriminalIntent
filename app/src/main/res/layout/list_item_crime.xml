@@ -13,7 +13,8 @@
             android:text="Crimen Title"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp" android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/crime_solved" android:layout_marginEnd="8dp"/>
+            app:layout_constraintEnd_toStartOf="@+id/crime_solved" android:layout_marginEnd="8dp"
+            android:textSize="18sp" android:textColor="@android:color/black"/>
     <TextView
             android:id="@+id/crime_date"
             android:layout_width="0dp"
