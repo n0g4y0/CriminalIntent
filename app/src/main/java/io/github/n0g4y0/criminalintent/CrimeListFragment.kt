@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -114,10 +115,14 @@ class CrimeListFragment : Fragment() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
                 : CrimeHolder {
 
-            getItemViewType()
+            //getItemViewType()
             val view = layoutInflater.inflate(R.layout.list_item_crime,parent,false)
             return CrimeHolder(view)
 
+        }
+
+        override fun getItemViewType(position: Int): Int {
+            return super.getItemViewType(position)
         }
 
         override fun getItemCount() = crimes.size
