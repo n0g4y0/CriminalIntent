@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.n0g4y0.criminalintent.models.Crime
+import java.text.SimpleDateFormat
 
 private const val TAG = "CrimeListFragment"
 
@@ -97,7 +98,24 @@ class CrimeListFragment : Fragment() {
 
             // asignando el texto, al atributo TEXT de los WIDGETs
             titleTextView.text = this.crime.title
-            dateTextView.text = this.crime.date.toString()
+
+            // cambios para que se muestre la fecha formateado:
+            /*
+            * ejemplos de formato:
+            *
+            *
+            * "dd/MM/yyyy"                           >    22/08/2019
+            * "EEE, MMM d, yyyy"                     >    Wed, Jul 4, 2001
+            * "h:mm a"                               >    12:08 PM
+            * "EEE, d MMM yyyy HH:mm:ss Z"           >    Wed, 4 Jul 2001 12:08:56 -0700
+            *
+            * mas ejemplos en: https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
+            *
+            * */
+            val format = SimpleDateFormat("EEE, MMM d, yyyy")
+            val dateFormatter:String = format.format(crime.date)
+
+            dateTextView.text = dateFormatter
             // muestra la imagen, siempre y cuando este resuelto (valor = TRUE)
             solvedImageView.visibility = if (crime.isSolved){
                 View.VISIBLE
