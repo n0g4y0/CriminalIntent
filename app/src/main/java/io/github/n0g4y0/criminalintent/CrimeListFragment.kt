@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -78,6 +79,8 @@ class CrimeListFragment : Fragment() {
 
         val titleTextView: TextView = itemView.findViewById(R.id.crime_title)
         val dateTextView: TextView = itemView.findViewById(R.id.crime_date)
+        // variable para manipular el ImageView:
+        val solvedImageView: ImageView = itemView.findViewById(R.id.crime_solved)
 
         /*
         * es un escuchador (LISTENER) de cada item que se haga click
@@ -87,7 +90,7 @@ class CrimeListFragment : Fragment() {
             itemView.setOnClickListener(this)
         }
 
-        // funcion que vincula los datos del CRIME, con los WIDGETs
+        // funcion que vincula (ENLAZA) los datos del CRIME, con los WIDGETs
         fun bind(crime:Crime){
 
             this.crime = crime
@@ -95,6 +98,12 @@ class CrimeListFragment : Fragment() {
             // asignando el texto, al atributo TEXT de los WIDGETs
             titleTextView.text = this.crime.title
             dateTextView.text = this.crime.date.toString()
+            // muestra la imagen, siempre y cuando este resuelto (valor = TRUE)
+            solvedImageView.visibility = if (crime.isSolved){
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
 
         }
 
