@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
@@ -30,6 +32,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0' // extension para utilizar los ViewModel
     implementation 'androidx.recyclerview:recyclerview:1.0.0' // extension para utilizar el RecyclerView
+    implementation 'androidx.room:room-runtime:2.1.0-alpha04' //librerias para el manejo de bases de datos
+    kapt 'androidx.room:room-compiler:2.1.0-alpha04'            //librerias para el manejo de bases de datos
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
