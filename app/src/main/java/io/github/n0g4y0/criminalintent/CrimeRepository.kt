@@ -2,9 +2,10 @@ package io.github.n0g4y0.criminalintent
 
 import android.content.Context
 import androidx.room.Room
-import io.github.n0g4y0.criminalintent.database.CrimeDao
 import io.github.n0g4y0.criminalintent.database.CrimeDatabase
+import io.github.n0g4y0.criminalintent.models.Crime
 import java.lang.IllegalStateException
+import java.util.*
 
 private const val DATABASE_NAME = "crime-database"
 
@@ -16,7 +17,11 @@ class CrimeRepository private constructor(context: Context){
         DATABASE_NAME
         ).build()
 
-    private val CrimeDao = database.crimeDao()
+    private val crimeDao = database.crimeDao()
+
+    fun getCrimes(): List<Crime> = crimeDao.getCrimes()
+
+    fun getCrime(id: UUID): Crime? = crimeDao.getCrime(id)
 
     companion object {
         private var INSTANCE: CrimeRepository? = null
