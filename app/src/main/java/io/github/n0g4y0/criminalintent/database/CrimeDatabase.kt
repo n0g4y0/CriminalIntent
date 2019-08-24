@@ -12,4 +12,6 @@ import io.github.n0g4y0.criminalintent.models.Crime
 @Database(entities = [ Crime::class ],version = 1)
 @TypeConverters(CrimeTypeConverters::class)
 abstract class CrimeDatabase: RoomDatabase() {
+
+    abstract fun crimeDao():CrimeDao
 }
