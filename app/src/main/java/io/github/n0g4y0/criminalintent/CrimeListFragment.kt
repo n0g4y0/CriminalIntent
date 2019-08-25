@@ -26,13 +26,6 @@ class CrimeListFragment : Fragment() {
         ViewModelProviders.of(this).get(CrimeListViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // inicialmente, al llamar al fragment, solo mostrara esto en consola:
-        Log.d(TAG, "Total crimes: ${crimeListViewModel.crimes.size}")
-    }
-
     /*
     * funcion que visualiza o INFLATE la vista del fragment (en este caso, el de FRAGMENT_CRIME_LIST):
     *
@@ -50,13 +43,11 @@ class CrimeListFragment : Fragment() {
         crimeRecyclerView.layoutManager = LinearLayoutManager(context)
 
         // funcion para conectar el RecyclerView con el ADAPTER, para mostrar los ITEMS
-        updateUI()
 
         return view
     }
 
-    private fun updateUI() {
-        val crimes = crimeListViewModel.crimes
+    private fun updateUI(crimes: List<Crime>) {
         adapter = CrimeAdapter(crimes)
         crimeRecyclerView.adapter = adapter
     }
