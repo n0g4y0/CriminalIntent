@@ -2,8 +2,14 @@ package io.github.n0g4y0.criminalintent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+private const val TAG = "MainActivity"
+
+class MainActivity : AppCompatActivity(),
+    CrimeListFragment.CallBacks {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,5 +28,9 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
+    }
+
+    override fun oncrimeSelected(crimeID: UUID) {
+        Log.d(TAG,"MainActivity.onCrimeSelected: $crimeID")
     }
 }
