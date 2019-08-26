@@ -31,6 +31,14 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun oncrimeSelected(crimeID: UUID) {
-        Log.d(TAG,"MainActivity.onCrimeSelected: $crimeID")
+        /*
+        * el siguiente codigo mostrara el fragment de CrimeFragment:
+        * */
+        // crea una variable, que almacenara la instancia de CrimeFragment:
+        val fragment = CrimeFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container,fragment)
+            .commit()
     }
 }
