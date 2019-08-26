@@ -22,6 +22,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    // mediante la siguiente linea, digo que el SCHEMA (esquema) de la BD, sera guardada en la siguiente ruta,
+    //esto para evitar que salga el warning, que se inicia cuando ejecuto la APP.
+    kapt{
+        arguments{
+            arg("room.schemaLocation","/data/data/io.github.n0g4y0.criminalintent")
+        }
+    }
 }
 
 dependencies {
