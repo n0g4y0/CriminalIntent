@@ -1,5 +1,6 @@
 package io.github.n0g4y0.criminalintent
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,10 +15,26 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.n0g4y0.criminalintent.models.Crime
+import java.util.*
 
 private const val TAG = "CrimeListFragment"
 
 class CrimeListFragment : Fragment() {
+
+    /*
+    * Interfaz requerida, para actividades de HOSTING.
+    *
+    * la siguiente interfaz, es utilizado para manipular FRAGMENT's
+    * y mantener la indepencencia y facil manipulacion de los mismos.
+    *
+    * */
+    interface CallBacks{
+        fun oncrimeSelected(crimeID: UUID)
+    }
+
+    private var callbacks: CallBacks? = null
+
+
 
     private lateinit var crimeRecyclerView : RecyclerView
     //para conectar con el adaptador:
@@ -25,6 +42,11 @@ class CrimeListFragment : Fragment() {
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProviders.of(this).get(CrimeListViewModel::class.java)
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        callbacks = context as CallBacks?
     }
 
     /*
@@ -64,6 +86,11 @@ class CrimeListFragment : Fragment() {
             }
 
         )
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callbacks = null
     }
 
     private fun updateUI(crimes: List<Crime>) {
