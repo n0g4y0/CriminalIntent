@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(),
         * el siguiente codigo mostrara el fragment de CrimeFragment:
         * */
         // crea una variable, que almacenara la instancia de CrimeFragment:
-        val fragment = CrimeFragment()
+        val fragment = CrimeFragment.newInstance(crimeID)
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container,fragment)

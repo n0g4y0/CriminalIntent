@@ -11,6 +11,9 @@ import android.widget.CheckBox
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import io.github.n0g4y0.criminalintent.models.Crime
+import java.util.*
+
+private const val ARG_CRIME_ID = "crime_id"
 
 class CrimeFragment : Fragment() {
     private lateinit var crime :Crime
@@ -99,5 +102,23 @@ class CrimeFragment : Fragment() {
         }
 
     }
+    /*
+    *
+    * creamos la siguiente INSTANCIA, para cargar los parametros, que luego las vamos
+    * a utilizar en otra instancia.
+    * */
+
+    companion object {
+        fun newInstance(crimeID: UUID): CrimeFragment{
+            val args = Bundle().apply {
+                putSerializable(ARG_CRIME_ID,crimeID)
+            }
+
+            return CrimeFragment().apply {
+                arguments = args
+            }
+        }
+    }
+
 
 }
