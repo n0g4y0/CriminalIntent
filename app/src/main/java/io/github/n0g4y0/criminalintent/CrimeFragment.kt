@@ -3,6 +3,7 @@ package io.github.n0g4y0.criminalintent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import io.github.n0g4y0.criminalintent.models.Crime
 import java.util.*
 
+private const val TAG = "CrimeFragment"
 private const val ARG_CRIME_ID = "crime_id"
 
 class CrimeFragment : Fragment() {
@@ -29,6 +31,10 @@ class CrimeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         crime = Crime()
+
+        val crimeID: UUID = arguments?.getSerializable(ARG_CRIME_ID) as UUID
+        Log.d(TAG,"args bundle crime ID: $crimeID")
+        //Eventualmente, carga el CRIMEN (Crime) desde la BD
     }
 
     /*
