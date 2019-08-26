@@ -145,8 +145,9 @@ class CrimeListFragment : Fragment() {
         }
 
         override fun onClick(v: View?) {
-            Toast.makeText(context, "${crime.title} Clickeado..!!",Toast.LENGTH_SHORT)
-                .show()
+
+            // de esta manera, llamamos al callBack, y mandamos el CONTEXT, en este caso, el UUID del item CRIME.
+            callbacks?.oncrimeSelected(crime.id)
         }
     }
 
