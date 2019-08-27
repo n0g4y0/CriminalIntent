@@ -72,6 +72,37 @@ class CrimeFragment : Fragment() {
     }
 
     /*
+    * funcion que hace la implementacion de OBSERVERS (observadores) de los datos del CrimeDetailViewModel
+    * y actualiza la UI, cada vez que cambien los datos (o se actualizen)
+    *
+    * */
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        crimeDetailViewModel.crimeLiveData.observe(
+            viewLifecycleOwner,
+            androidx.lifecycle.Observer {crime ->
+                crime?.let {
+                    this.crime = crime
+                    updateUI()
+                }
+            })
+    }
+
+    /*
+    * actualiza las vistas UI
+    *
+    * */
+    private fun updateUI(){
+        titleField.setText(crime.title)
+        dateButton.text = crime.date.toString()
+        solvedCheckBox.isChecked = crime.isSolved
+    }
+
+
+
+    /*
     * funcion para INICIALIZAR y agregar un ESCUCHA (LISTENER) al WIDGET:
     * */
 
