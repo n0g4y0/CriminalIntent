@@ -11,7 +11,10 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import io.github.n0g4y0.criminalintent.models.Crime
+import io.github.n0g4y0.criminalintent.models.CrimeDetailViewModel
 import java.util.*
 
 private const val TAG = "CrimeFragment"
@@ -28,13 +31,17 @@ class CrimeFragment : Fragment() {
     // ahora el checkbox:
     private lateinit var solvedCheckBox: CheckBox
 
+    // variable para mostrar la consulta del ID de un determinado Crime(utilizando LiveDatas:)
+    private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
+        ViewModelProviders.of(this).get(CrimeDetailViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         crime = Crime()
 
         val crimeID: UUID = arguments?.getSerializable(ARG_CRIME_ID) as UUID
-        Log.d(TAG,"args bundle crime ID: $crimeID")
-        //Eventualmente, carga el CRIMEN (Crime) desde la BD
+        crimeDetailViewModel.loadCrime(crimeID)
     }
 
     /*
