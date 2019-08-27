@@ -151,11 +151,20 @@ class CrimeFragment : Fragment() {
         }
 
     }
+
     /*
-    *
-    * creamos la siguiente INSTANCIA, para cargar los parametros, que luego las vamos
-    * a utilizar en otra instancia.
-    * */
+   *
+   * sobreEscribimos el siguiente ciclo de vida, para cuando el fragment pase a un estado STOPPED
+   * (cuando el fragment no se pueda ver), aprovechamos para guardar los datos en la BD.
+   * */
+
+    override fun onStop() {
+        super.onStop()
+        crimeDetailViewModel.saveCrime(crime)
+    }
+
+
+
 
     companion object {
         fun newInstance(crimeID: UUID): CrimeFragment{
