@@ -19,6 +19,7 @@ import java.util.*
 
 private const val TAG = "CrimeFragment"
 private const val ARG_CRIME_ID = "crime_id"
+private const val DIALOG_DATE = "DialogDate"
 
 class CrimeFragment : Fragment() {
     private lateinit var crime :Crime
@@ -63,10 +64,6 @@ class CrimeFragment : Fragment() {
         // conectando el checkbox:
         solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
 
-        dateButton.apply {
-            text = crime.date.toString()
-            isEnabled = false
-        }
 
         return view
     }
@@ -147,6 +144,16 @@ class CrimeFragment : Fragment() {
         solvedCheckBox.apply {
             setOnCheckedChangeListener { _, isChecked ->
                 crime.isSolved = isChecked
+            }
+        }
+        /*
+        * usando el boton, para motrar,mediante un DialogFragment, un DataPicker, para cambiar la fecha:
+        *
+        * */
+
+        dateButton.setOnClickListener {
+            DatePickerFragment().apply {
+                show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE)
             }
         }
 
