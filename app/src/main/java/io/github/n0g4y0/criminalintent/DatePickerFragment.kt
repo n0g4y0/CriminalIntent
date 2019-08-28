@@ -3,8 +3,11 @@ package io.github.n0g4y0.criminalintent
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import java.util.*
+
+private const val ARG_DATE = "date"
 
 class DatePickerFragment : DialogFragment() {
 
@@ -21,5 +24,21 @@ class DatePickerFragment : DialogFragment() {
             initialMonth,
             initialDay
         )
+    }
+
+    /*
+    * creando un nueva instancia, para guardar y pasar los argumentos a otro fragment,
+     * mediante la tecnico de paso de ARGUMENTOS, en este caso, la fecha:
+    *
+    * */
+    companion object {
+        fun newInstance(date: Date) : DatePickerFragment {
+            val args = Bundle().apply {
+                putSerializable(ARG_DATE, date)
+            }
+            return DatePickerFragment().apply {
+                arguments = args
+            }
+        }
     }
 }
