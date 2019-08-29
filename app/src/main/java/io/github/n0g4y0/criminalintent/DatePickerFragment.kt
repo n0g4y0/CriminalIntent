@@ -19,20 +19,37 @@ class DatePickerFragment : DialogFragment() {
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        // agregando un escuchador, oyente (LISTENER), para que envie la nueva FECHA de regreso a CrimeFragment:
+
+        // OnDateSetListener -> es usado para recibir la fecha que selecciona el usuario:
+        val dateListener = DatePickerDialog.OnDateSetListener {
+            // el signo _ ,significa que la variable, no esta la esta utilizando, es una convencion de
+            //kotlin para denotar parametros que no se utilizan:
+                 _: DatePicker, year: Int, month: Int, day: Int ->
+
+                val resultDate : Date = GregorianCalendar(year, month, day).time
+
+                targetFragment?.let { fragment ->
+                    (fragment as Callbacks).onDateSelected(resultDate)
+
+                }
+        }
+
         // pasando la fecha DATE, dada desde CrimeFragment
         val date = arguments?.getSerializable(ARG_DATE) as Date
         val calendar = Calendar.getInstance()
         calendar.time = date
         val initialYear = calendar.get(Calendar.YEAR)
         val initialMonth = calendar.get(Calendar.MONTH)
-        val initialDay = calendar.get(Calendar.DAY_OF_MONTH)
+        val initialDate = calendar.get(Calendar.DAY_OF_MONTH)
 
         return DatePickerDialog(
             requireContext(),
-            null,
+            dateListener,
             initialYear,
             initialMonth,
-            initialDay
+            initialDate
         )
     }
 
