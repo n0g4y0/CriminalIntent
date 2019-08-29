@@ -26,6 +26,7 @@ class DatePickerFragment : DialogFragment() {
         val dateListener = DatePickerDialog.OnDateSetListener {
             // el signo _ ,significa que la variable, no esta la esta utilizando, es una convencion de
             //kotlin para denotar parametros que no se utilizan:
+            // proyecto finalizado
                  _: DatePicker, year: Int, month: Int, day: Int ->
 
                 val resultDate : Date = GregorianCalendar(year, month, day).time
