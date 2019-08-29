@@ -20,6 +20,8 @@ import java.util.*
 private const val TAG = "CrimeFragment"
 private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
+// constante para solicitar CODIGO, para retornar valores a este Fragment:
+private const val REQUEST_DATE = 0
 
 class CrimeFragment : Fragment() {
     private lateinit var crime :Crime
@@ -153,6 +155,9 @@ class CrimeFragment : Fragment() {
 
         dateButton.setOnClickListener {
             DatePickerFragment.newInstance(crime.date).apply {
+                // hacemos que CrimeFragment sea el FRAGMENTO OBJETIVO de la instancia de DatePickerFragment:
+                setTargetFragment(this@CrimeFragment, REQUEST_DATE)
+                
                 show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE)
             }
         }
