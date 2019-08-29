@@ -10,6 +10,13 @@ import java.util.*
 private const val ARG_DATE = "date"
 
 class DatePickerFragment : DialogFragment() {
+    /*
+    * creamos una interface llamada Callbacks, que CrimeFragment la implementara
+    * */
+    interface Callbacks {
+        fun onDateSelected(date: Date)
+    }
+
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // pasando la fecha DATE, dada desde CrimeFragment

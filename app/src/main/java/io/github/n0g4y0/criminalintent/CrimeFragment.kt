@@ -23,7 +23,7 @@ private const val DIALOG_DATE = "DialogDate"
 // constante para solicitar CODIGO, para retornar valores a este Fragment:
 private const val REQUEST_DATE = 0
 
-class CrimeFragment : Fragment() {
+class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var crime :Crime
     // inicializando los WIDGETS:
     private lateinit var titleField: EditText
@@ -157,7 +157,7 @@ class CrimeFragment : Fragment() {
             DatePickerFragment.newInstance(crime.date).apply {
                 // hacemos que CrimeFragment sea el FRAGMENTO OBJETIVO de la instancia de DatePickerFragment:
                 setTargetFragment(this@CrimeFragment, REQUEST_DATE)
-                
+
                 show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE)
             }
         }
@@ -174,6 +174,15 @@ class CrimeFragment : Fragment() {
         super.onStop()
         crimeDetailViewModel.saveCrime(crime)
     }
+
+    /*
+    * implementando el Callbacks  de DatePickerFragment:
+    * */
+    override fun onDateSelected(date: Date) {
+        crime.date = date
+        updateUI()
+    }
+
 
 
 
