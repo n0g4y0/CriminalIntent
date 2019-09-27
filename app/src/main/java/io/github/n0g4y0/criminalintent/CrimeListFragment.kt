@@ -47,6 +47,14 @@ class CrimeListFragment : Fragment() {
         callbacks = context as CallBacks?
     }
 
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // ponemos esta linea, para que el FragmentMAnager sepa, que esta clase, necesita recibir CALLBACKS (devoluciones de llamadas del menu).
+        setHasOptionsMenu(true)
+    }
+
     /*
     * funcion que visualiza o INFLATE la vista del fragment (en este caso, el de FRAGMENT_CRIME_LIST):
     *
