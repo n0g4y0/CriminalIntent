@@ -108,6 +108,23 @@ class CrimeListFragment : Fragment() {
         inflater?.inflate(R.menu.fragment_crime_list, menu)
     }
 
+    /*
+    * funcion para responder a la seleccion del menu, cuando el usuario presiona el icono añadir
+    * */
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        return when (item?.itemId){
+            R.id.new_crime -> {
+                val crime = Crime()
+                crimeListViewModel.addCrime(crime)
+                callbacks?.oncrimeSelected(crime.id)
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun updateUI(crimes: List<Crime>) {
         adapter = CrimeAdapter(crimes)
         crimeRecyclerView.adapter = adapter
