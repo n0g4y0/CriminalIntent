@@ -91,6 +91,10 @@ class CrimeListFragment : Fragment() {
         callbacks = null
     }
 
+    /*
+    * funcion para INFLAR el menu (esto es el modo FRAGMENT)
+    * */
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.fragment_crime_list, menu)
