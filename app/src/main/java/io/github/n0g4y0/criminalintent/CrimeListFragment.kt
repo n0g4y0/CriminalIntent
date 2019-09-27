@@ -114,6 +114,7 @@ class CrimeListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
+    // a partir de esta funcion, ya no es necesario la BD de datos cargada previamente ,se puede borrar.
         return when (item?.itemId){
             R.id.new_crime -> {
                 val crime = Crime()
