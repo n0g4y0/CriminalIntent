@@ -1,6 +1,8 @@
 package io.github.n0g4y0.criminalintent
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
@@ -125,6 +127,36 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
         // si ya tenemos un sospechoso, se lo pondra como texto al texto del BOTON
         if (crime.suspect.isNotEmpty()){
             suspectButton.text = crime.suspect
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when {
+            resultCode != Activity.RESULT_OK -> return
+
+            requestCode == REQUEST_CONTACT && data != null -> {
+                val contactUri: Uri? = data.data
+                // especificando que campos quieres consultar para retornar valores:
+                val queryFields  = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
+                // hara tu consulta, la variable contactUri es como la clausula WHERE aqui:
+                val cursor = requireActivity().contentResolver
+                    .query(contactUri,queryFields,null,null,null)
+                cursor?.use {
+                    // verificando si la variable CURSOR contiene al menos, 1 resultado
+                    if (it.count == 0){
+                        return
+                    }
+
+                    // trae la primera columna de la primera fila de datos
+                    // ese seria el nombre del sospechoso, o del contacto
+                    it.moveToFirst()
+                    val suspect = it.getString(0)
+                    crime.suspect = suspect
+                    crimeDetailViewModel.saveCrime(crime)
+                    suspectButton.text = suspect
+                }
+            }
         }
     }
 
