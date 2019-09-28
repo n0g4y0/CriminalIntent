@@ -1,5 +1,6 @@
 package io.github.n0g4y0.criminalintent
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -36,6 +37,9 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
     // ahora el checkbox:
     private lateinit var solvedCheckBox: CheckBox
 
+    // variable para el boton enviar reporte:
+    private lateinit var reportButton : Button
+
     // variable para mostrar la consulta del ID de un determinado Crime(utilizando LiveDatas:)
     private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
         ViewModelProviders.of(this).get(CrimeDetailViewModel::class.java)
@@ -67,6 +71,11 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
         dateButton = view.findViewById(R.id.crime_date) as Button
         // conectando el checkbox:
         solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
+
+        // conectando al boton de enviar reporte, enviar crimen:
+
+        reportButton = view.findViewById(R.id.crime_report) as Button
+
 
 
         return view
@@ -182,6 +191,19 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
                 setTargetFragment(this@CrimeFragment, REQUEST_DATE)
 
                 show(this@CrimeFragment.requireFragmentManager(), DIALOG_DATE)
+            }
+        }
+
+        // dandole funcionalidad al boton de enviar reporte del crimen:
+        reportButton.setOnClickListener {
+            Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, getCrimeReport())
+                putExtra(
+                    Intent.EXTRA_SUBJECT,
+                    getString(R.string.crime_report_subject))
+            }.also { intent ->
+                startActivity(intent)
             }
         }
 
