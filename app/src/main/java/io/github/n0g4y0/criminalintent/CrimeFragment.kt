@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import io.github.n0g4y0.criminalintent.models.Crime
 import io.github.n0g4y0.criminalintent.models.CrimeDetailViewModel
+import java.text.DateFormat
 import java.util.*
 
 private const val TAG = "CrimeFragment"
@@ -22,6 +23,7 @@ private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
 // constante para solicitar CODIGO, para retornar valores a este Fragment:
 private const val REQUEST_DATE = 0
+private const val DATE_FORMAT = "EEE, MMM, dd"
 
 class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var crime :Crime
@@ -102,6 +104,27 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
             isChecked = crime.isSolved
             jumpDrawablesToCurrentState()
         }
+    }
+
+    /*
+    * funcion para devolver un reporte de crimen
+    * */
+
+    private fun getCrimeReport(): String{
+        val solvedString = if (crime.isSolved){
+            getString(R.string.crime_report_solved)
+        }else{
+            getString(R.string.crime_report_unsolved)
+        }
+        val dateString = android.text.format.DateFormat.format(DATE_FORMAT, crime.date).toString()
+        var suspect = if (crime.suspect.isBlank()){
+            getString(R.string.crime_report_no_suspect)
+        }else{
+            getString(R.string.crime_report_suspect, crime.suspect)
+        }
+
+        return getString(R.string.crime_report,
+                crime.title,dateString,solvedString,suspect)
     }
 
 

@@ -8,4 +8,14 @@
     <string name="crime_suspect_text">Choose Suspect</string>
     <string name="crime_report_text">Send crime Report</string>
 
+    <string name="crime_report">%1%s!
+        the Crimen fue descubierto el %2$s. %3$s, and %4$s
+    </string>
+    <string name="crime_report_solved">El caso esta Resuelto</string>
+    <string name="crime_report_unsolved">El caso NO ESTA RESUELTO</string>
+    <string name="crime_report_no_suspect">no hay un sospechoso</string>
+    <string name="crime_report_suspect">el sospechoso es %s.</string>
+    <string name="crime_report_subject">CriminalIntent Reporte de Crimen</string>
+    <string name="send_report">Enviar Reporte de Crimen, Via</string>
+
 </resources>
