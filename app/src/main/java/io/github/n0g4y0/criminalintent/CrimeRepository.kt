@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import io.github.n0g4y0.criminalintent.database.CrimeDatabase
+import io.github.n0g4y0.criminalintent.database.migration_1_2
 import io.github.n0g4y0.criminalintent.models.Crime
 import java.lang.IllegalStateException
 import java.util.*
@@ -17,7 +18,8 @@ class CrimeRepository private constructor(context: Context){
         context.applicationContext,
         CrimeDatabase::class.java,
         DATABASE_NAME
-        ).build()
+        ).addMigrations(migration_1_2)
+        .build()
 
     private val crimeDao = database.crimeDao()
     // creando variable para usar un objeto EXCECUTOR, clase para el manejo de actualizaciones y registros en la BD:
