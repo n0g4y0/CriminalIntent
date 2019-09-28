@@ -2,6 +2,7 @@ package io.github.n0g4y0.criminalintent
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -24,6 +25,7 @@ private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
 // constante para solicitar CODIGO, para retornar valores a este Fragment:
 private const val REQUEST_DATE = 0
+private const val REQUEST_CONTACT = 1
 private const val DATE_FORMAT = "EEE, MMM, dd"
 
 class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
@@ -39,6 +41,9 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
 
     // variable para el boton enviar reporte:
     private lateinit var reportButton : Button
+
+    // variable que contendra a un valor, de los contactos del telefono, un sospechoso.
+    private lateinit var suspectButton : Button
 
     // variable para mostrar la consulta del ID de un determinado Crime(utilizando LiveDatas:)
     private val crimeDetailViewModel : CrimeDetailViewModel by lazy {
@@ -76,6 +81,10 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
 
         reportButton = view.findViewById(R.id.crime_report) as Button
 
+        // conectando el boton de sospechoso, con su variable:
+
+        suspectButton = view.findViewById(R.id.crime_suspect) as Button
+
 
 
         return view
@@ -112,6 +121,10 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
         solvedCheckBox.apply {
             isChecked = crime.isSolved
             jumpDrawablesToCurrentState()
+        }
+        // si ya tenemos un sospechoso, se lo pondra como texto al texto del BOTON
+        if (crime.suspect.isNotEmpty()){
+            suspectButton.text = crime.suspect
         }
     }
 
@@ -206,6 +219,14 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
                 var chooserIntent =
                         Intent.createChooser(intent, getString(R.string.send_report))
                 startActivity(chooserIntent)
+            }
+        }
+
+        suspectButton.apply {
+            val pickContactIntent =
+                    Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+            setOnClickListener {
+                startActivityForResult(pickContactIntent, REQUEST_CONTACT)
             }
         }
 
