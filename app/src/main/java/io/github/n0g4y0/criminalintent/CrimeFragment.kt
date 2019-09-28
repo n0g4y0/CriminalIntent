@@ -263,7 +263,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
             }
             // esta seccion de codigo, sirve para verificar si existe una APP de CONTACTOS en el dispositivo, si no lo hay ,bloquea el BOTON
             // agregando un codigo tonto, para ver si funciona el bloqueo de boton, si no hay la APP DE CONTANTOS:
-            pickContactIntent.addCategory(Intent.CATEGORY_HOME)
+            
             val packageManager : PackageManager = requireActivity().packageManager
             val resolvedActivity : ResolveInfo? =
                 packageManager.resolveActivity(pickContactIntent,
