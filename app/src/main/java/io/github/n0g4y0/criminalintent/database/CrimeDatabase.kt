@@ -11,7 +11,7 @@ import io.github.n0g4y0.criminalintent.models.Crime
 * con la clase TYPECONVERTERS, manejamos la conversion de tipos de datos complejos, ejm: DATE y UUID
 * */
 
-@Database(entities = [ Crime::class ],version = 1)
+@Database(entities = [ Crime::class ],version = 2)
 @TypeConverters(CrimeTypeConverters::class)
 abstract class CrimeDatabase: RoomDatabase() {
 
